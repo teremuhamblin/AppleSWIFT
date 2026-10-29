@@ -8,7 +8,7 @@ public struct ModelInfo {
     public let model: String
 }
 
-public final class SmartphonesZ {
+public final class AppleSWIFT {
 
     public init() {}
 
