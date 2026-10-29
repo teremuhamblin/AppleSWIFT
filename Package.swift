@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "SmartphonesZ",
+    name: "AppleSWIFT",
     products: [
-        .library(name: "SmartphonesZ", targets: ["SmartphonesZ"])
+        .library(name: "AppleSWIFT", targets: ["SmartphonesZ"])
     ],
     targets: [
-        .target(name: "SmartphonesZ")
+        .target(name: "AppleSWIFT")
     ]
 )
