@@ -1,4 +1,4 @@
-📱 SmartphonesZ
+# 📱 SmartphonesZ
 - — Mini‑Projet Ultra Simple
 
 Un micro‑projet Swift (ou concept général), en version super légère, orientée smartphones / infos / parsing basique.
