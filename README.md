@@ -27,6 +27,7 @@
 ---
 
 📑 Sommaire
+```text
 - ☑️ Présentation
 - ☑️ Fonctionnalités
 - ☑️ Installation (SwiftPM)
@@ -36,6 +37,7 @@
 - ☑️ Fichiers de gouvernance
 - ☑️ Licence
 - ☑️ Footer
+```
 
 ---
 
@@ -61,7 +63,7 @@ Il est minimaliste, propre, sans dépendances, et 100% compatible SwiftPM.
 ---
 
 ### 📦 Installation
-
+```text
 - 》》 Via Swift Package Manager
 
 `text
@@ -73,6 +75,7 @@ https://github.com/teremuhamblin/AppleSWIFT
 `swift
 import AppleSWIFT
 `
+```
 
 ### 🚀 Usage rapide
 
@@ -87,8 +90,6 @@ print(info.brand)   // iPhone
 print(info.model)   // 14 Pro
 ```
 
----
-
 ### 📚 Objectif du projet
 
 AppleSWIFT fournit une base simple, propre, compréhensible pour manipuler des données liées aux iPhone :
@@ -98,8 +99,6 @@ AppleSWIFT fournit une base simple, propre, compréhensible pour manipuler des d
 - formatage minimaliste,  
 - architecture extensible pour un futur vrai framework Apple.
 ```
-
----
 
 ### ⚙️ Paramétrages avancés
 
@@ -114,21 +113,8 @@ AppleSWIFT fournit une base simple, propre, compréhensible pour manipuler des d
 - ☑️ Mode OSINT (Termux / Python / CLI)  
 - ☑️ Version militarisée Ghost‑Ops (si tu veux 😎)
 
----
-
 ### 🛡️ Fichiers de gouvernance
-
-Ton dépôt peut inclure les fichiers suivants (liens cliquables si tu les ajoutes) :
-
-- 📘 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📗 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📙 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📒 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📓 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📔 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]  
-- 📕 [Il semble que le résultat n’était pas sûr à afficher. Changeons un peu et essayons autre chose !]
-
----
+>> Ton dépôt peut inclure les fichiers dans **.github/** 
 
 ### 🛠️ Licence
 ```text
@@ -140,16 +126,16 @@ Version recommandée : APL‑FR v1.0 (AppleSWIFT Personal License).
 
 🪐 Footer
 
-<div align="center">
+<div align="left">
 
-🌙 AppleSWIFT — Crafted with Swift • Designed in France 🇫🇷
-Ultra‑light. Ultra‑clean. Ultra‑modular.  
-Pour iOS, macOS, tvOS, watchOS… et pour toi.
+- 🌙 AppleSWIFT — Crafted with Swift • Designed in France 🇫🇷
+   - Ultra‑light. Ultra‑clean. Ultra‑modular.  
+   - Pour iOS, macOS, tvOS, watchOS… et pour toi.
 
 ---
 
-© 2026 — The MadDoG.tmdg  
-Apple‑grade micro‑framework — évolutif, extensible, élégant.
+- © 2026 — The MadDoG.tmdg  
+   - Apple‑grade micro‑framework — évolutif, extensible, élégant.
 
 </div>
 
