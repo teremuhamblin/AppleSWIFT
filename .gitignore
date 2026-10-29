@@ -1,0 +1,78 @@
+# AppleSWIFT — iOS / macOS / tvOS / watchOS
+
+## Xcode
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+## SwiftPM
+.build/
+.swiftpm/
+
+## CocoaPods
+Pods/
+Podfile.lock
+*.podspec
+project.xcworkspace/
+
+## Carthage
+Carthage/Build/
+
+## Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+## Archives
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Logs
+*.log
+
+## iOS Simulator
+Library/Developer/CoreSimulator/
+*.simdevicetype
+*.simruntime
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Swift
+*.swiftsourceinfo
+
+## Build Artifacts
+*.o
+*.linkfilelist
+*.map
+*.json
+
+## Temporary
+*.tmp
+*.temp
+*.swp
+*.swo
+
+## IDE
+.idea/
+.vscode/
+
+## Assets
+*.png.tmp
+*.jpg.tmp
+*.svg.tmp
+
+## Tests
+coverage/
+*.profdata
+
+## tvOS / watchOS
+*.tvosbuild
+*.watchosbuild
