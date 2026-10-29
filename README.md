@@ -129,13 +129,14 @@ Version recommandée : APL‑FR v1.0 (AppleSWIFT Personal License).
 <div align="left">
 
 - 🌙 AppleSWIFT — Crafted with Swift • Designed in France 🇫🇷
-   - Ultra‑light. Ultra‑clean. Ultra‑modular.  
-   - Pour iOS, macOS, tvOS, watchOS… et pour toi.
+- Ultra‑light. Ultra‑clean. Ultra‑modular.  
+- Pour iOS, macOS, tvOS, watchOS… et pour toi.
 
 ---
 
 - © 2026 — The MadDoG.tmdg  
-   - Apple‑grade micro‑framework — évolutif, extensible, élégant.
+- Apple‑grade micro‑framework
+- Évolutif, extensible, élégant.
 
 </div>
 
