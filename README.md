@@ -3,7 +3,10 @@
 # 🌌 AppleSWIFT
 ### *Suite de Diagnostic Apple, Parsing Matériel & Validation Sécurisée*
 
-⚡ **Diagnostic iOS & macOS** &nbsp;•&nbsp; 📱 **Base Matérielle Apple** &nbsp;•&nbsp; 🔒 **Validation & Masquage RGPD** &nbsp;•&nbsp; 💻 **CLI `appleswift-diag`**
+- ⚡ **Diagnostic iOS & macOS** &nbsp;•&nbsp;
+- 📱 **Base Matérielle Apple** &nbsp;•&nbsp;
+- 🔒 **Validation & Masquage RGPD** &nbsp;•&nbsp;
+- 💻 **CLI `appleswift-diag`**
 
 <br />
 
