@@ -1,29 +1,27 @@
-public struct PhoneCheck {
-    public let raw: String
-    public let isValid: Bool
-}
+public struct AppleSWIFT: Sendable {
+    private let modelParser: ModelParser
+    private let numberValidator: NumberValidator
 
-public struct ModelInfo {
-    public let brand: String
-    public let model: String
-}
-
-public final class AppleSWIFT {
-
-    public init() {}
-
-    // Validation très simple : commence par + et contient au moins 8 chiffres
-    public func validateNumber(_ input: String) -> PhoneCheck {
-        let digits = input.filter { $0.isNumber }
-        let valid = input.starts(with: "+") && digits.count >= 8
-        return PhoneCheck(raw: input, isValid: valid)
+    public init(
+        modelParser: ModelParser = ModelParser(),
+        numberValidator: NumberValidator = NumberValidator()
+    ) {
+        self.modelParser = modelParser
+        self.numberValidator = numberValidator
     }
 
-    // Extraction naïve marque + modèle
-    public func parseModel(_ input: String) -> ModelInfo {
-        let parts = input.split(separator: " ")
-        let brand = parts.first.map(String.init) ?? "Unknown"
-        let model = parts.dropFirst().joined(separator: " ")
-        return ModelInfo(brand: brand, model: model)
+    /// Valide et normalise un numéro de téléphone avec masquage sécurisé pour les logs.
+    public func validateNumber(_ rawInput: String) -> PhoneValidationResult {
+        numberValidator.validate(rawInput)
+    }
+
+    /// Extrait la marque et le modèle à partir d'une chaîne brute.
+    public func parseModel(_ rawInput: String) -> ModelInfo {
+        modelParser.parse(rawInput)
+    }
+
+    /// Formate proprement le nom d'un appareil (espaces normalisés).
+    public func formatModel(_ rawInput: String) -> String {
+        modelParser.parse(rawInput).formatted
     }
 }
