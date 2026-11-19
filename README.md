@@ -1,35 +1,25 @@
-<!--Voici la mise à jour complète de **AppleSWIFT** vers la version **1.1.0**, présentée d'abord à travers une **Pull Request** structurée selon un `PULL_REQUEST_TEMPLATE` (prête à être utilisée ou enregistrée dans `.github/PULL_REQUEST_TEMPLATE.md`), suivie du nouveau fichier **`README.md` v1.1.0**.
--->
-
-###### Nouveau `README.md` >> markdown
-# Version 1.1.0
-
 <div align="center">
 
 # 🌌 AppleSWIFT
+### Mini‑Framework Swift Ultra‑Léger, Sécurisé & Modulaire
 
-</div>
-
-- **Mini‑Framework Swift**
-- **Modulaire**
-- **Parsing de modèles iPhone**
-   - 🔢 *Validation de numéros*
-   - 🧩 *Micro‑Framework SwiftPM*
+⚡ **Parsing de modèles iPhone**
+🔢 **Validation & Masquage RGPD**
+🧩 **Micro‑Framework SwiftPM**
 
 <br />
 
 <p>
   <img src="https://img.shields.io/badge/Version-v1.1.0-7C3AED?style=for-the-badge" alt="Version v1.1.0" />
-  <img src="https://img.shields.io/badge/Swift-5.9+-7C3AED?logo=swift&logoColor=white&style=for-the-badge" alt="Swift 5.9+" />
+  <img src="https://img.shields.io/badge/Swift-5.9+-7C3EAD?logo=swift&logoColor=white&style=for-the-badge" alt="Swift 5.9+" />
   <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS-8B008B?style=for-the-badge" alt="Platforms" />
   <img src="https://img.shields.io/badge/SwiftPM-Compatible-8B008B?style=for-the-badge" alt="SwiftPM Compatible" />
   <img src="https://img.shields.io/badge/Dependencies-Zero-8B008B?style=for-the-badge" alt="Zero Dependencies" />
+  <img src="https://img.shields.io/badge/Concurrency-Sendable-8B008B?style=for-the-badge" alt="Sendable" />
   <img src="https://img.shields.io/badge/License-APL--FR%20v1.0-8B008B?style=for-the-badge" alt="License APL-FR v1.0" />
   <img src="https://img.shields.io/badge/Made_in-France-8B008B?style=for-the-badge" alt="Made in France" />
 </p>
 
-<div align="center">
-  
 [Présentation](#-présentation) •
 [Architecture](#-architecture-du-dépôt) •
 [Sécurité](#-sécurité-et-bonnes-pratiques) •
@@ -56,27 +46,25 @@
 
 ## 📱 Présentation
 
-**AppleSWIFT** est un *mini‑framework Swift ultra‑léger*, conçu pour offrir une base saine, lisible et sans dépendances externes pour :
+**AppleSWIFT** est un *mini‑framework Swift ultra‑léger*, conçu pour offrir une base saine, thread‑safe (`Sendable`) et sans aucune dépendance externe pour :
 
 - 📱 **Analyser et extraire** les marques et modèles d'appareils (*ex. iPhone 14 Pro, Samsung Galaxy S21*).
-- 🔢 **Valider** des numéros de téléphone selon un format simple et rapide.
-- 🎨 **Formater** des données essentielles pour un affichage propre.
-- 🏗️ **Servir de socle modulaire** à un futur framework Apple plus complet.
+- 🔢 **Valider, normaliser et masquer** des numéros de téléphone selon un format E.164 simple.
+- 🎨 **Formater** proprement les chaînes d'appareils (`formatModel`).
+- 🏗️ **Servir de socle modulaire** à un futur framework Apple complet.
 
 > [!NOTE]
-> **Philosophie v1.1.0** : Code minimaliste, 100 % compatible **Swift Package Manager**, sans aucune dépendance tierce afin de garantir légèreté, rapidité de compilation et maîtrise totale de la chaîne logicielle.
+> **Philosophie v1.1.0** : 100 % Swift Standard Library (zéro dépendance, pas même `Foundation`), compatible **Swift Package Manager**, avec tests unitaires inclus.
 
 ---
 
 ## ✨ Fonctionnalités
 
-Chaque fonctionnalité est directement portée par un composant dédié du module `Sources/APP/` :
-
 | Fonctionnalité | Description | Fichier source (`Sources/APP/`) |
 | :--- | :--- | :--- |
-| 🧩 **Façade unifiée** | Point d'entrée public exposant validation, parsing et formatage minimaliste | `AppleSWIFT.swift` |
-| 📱 **Parsing de modèles** | Extraction structurée (`brand`, `model`) depuis une chaîne brute | `ModelParser.swift` |
-| 🔢 **Validation de numéros** | Vérification simple et rapide du format des numéros de téléphone | `NumberValidator.swift` |
+| 🧩 **Façade unifiée** | Point d'entrée public `Sendable` exposant validation, parsing et formatage | `AppleSWIFT.swift` |
+| 📱 **Parsing de modèles** | Extraction structurée (`brand`, `model`, `formatted`) avec garde‑fou O(1) | `ModelParser.swift` |
+| 🔢 **Validation & Masquage RGPD** | Normalisation, validation ASCII stricte et propriété `masked` anti‑fuite | `NumberValidator.swift` |
 
 ---
 
@@ -88,46 +76,54 @@ Chaque fonctionnalité est directement portée par un composant dédié du modul
 %%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#8B5CF6'}}}%%
 flowchart LR
     PKG["📦 Package.swift<br/>Configuration SwiftPM"] --> APP["📁 Sources/APP/"]
+    PKG --> TESTS["🧪 Tests/APPTests/"]
     APP --> ENTRY["🌌 AppleSWIFT.swift<br/>Façade Publique"]
-    ENTRY --> PARSER["📱 ModelParser.swift<br/>Extraction brand / model"]
-    ENTRY --> VALIDATOR["🔢 NumberValidator.swift<br/>Validation de numéro"]
-    PARSER --> OUT1["✨ Info Modèle"]
-    VALIDATOR --> OUT2["✅ Résultat isValid"]
+    ENTRY --> PARSER["📱 ModelParser.swift<br/>Extraction & Formatage"]
+    ENTRY --> VALIDATOR["🔢 NumberValidator.swift<br/>Validation & Masquage"]
+    PARSER --> OUT1["✨ ModelInfo<br/>brand / model / formatted"]
+    VALIDATOR --> OUT2["🔒 PhoneValidationResult<br/>isValid / normalized / masked"]
 
     classDef violet fill:#6D28D9,stroke:#A78BFA,stroke-width:2px,color:#FFFFFF;
     classDef darkViolet fill:#4C1D95,stroke:#C4B5FD,stroke-width:1.5px,color:#FFFFFF;
     classDef accent fill:#8B008B,stroke:#F0ABFC,stroke-width:1.5px,color:#FFFFFF;
 
-    class PKG,APP darkViolet;
+    class PKG,APP,TESTS darkViolet;
     class ENTRY violet;
     class PARSER,VALIDATOR,OUT1,OUT2 accent;
 ```
 
-### 📂 Arborescence actuelle
+### 📂 Arborescence complète
 
 ```text
 AppleSWIFT/
 ├── Package.swift
 ├── README.md
-└── Sources/
-    └── APP/
-        ├── AppleSWIFT.swift
-        ├── ModelParser.swift
-        └── NumberValidator.swift
+├── structure.md
+├── .github/
+│   └── PULL_REQUEST_TEMPLATE.md
+├── Sources/
+│   └── APP/
+│       ├── AppleSWIFT.swift
+│       ├── ModelParser.swift
+│       └── NumberValidator.swift
+└── Tests/
+    └── APPTests/
+        └── AppleSWIFTTests.swift
 ```
 
 <details>
-<summary>🔍 <strong>Détail de l'état des composants (basé sur structure.md)</strong></summary>
+<summary>🔍 <strong>État des composants du dépôt (v1.1.0)</strong></summary>
 
 <br />
 
 | Élément | Statut | Rôle dans le dépôt |
 | :--- | :---: | :--- |
-| `Package.swift` | ✔️ Présent | Déclaration SwiftPM du package, des produits et cibles (0 dépendance) |
-| `README.md` | ✔️ Présent | Documentation principale du projet (v1.1.0) |
-| `Sources/APP/` | ✔️ Présent | Cœur du module (`AppleSWIFT.swift`, `ModelParser.swift`, `NumberValidator.swift`) |
-| `Tests/` | ❌ Absent | Dossier de tests unitaires SwiftPM à intégrer prochainement |
-| `.github/` | ❌ Absent | Dossier destiné à la gouvernance (`PULL_REQUEST_TEMPLATE.md`, `SECURITY.md`, CI) |
+| `Package.swift` | ✔️ Présent | Configuration SwiftPM (module `AppleSWIFT`, 0 dépendance) |
+| `README.md` | ✔️ Présent | Documentation principale (v1.1.0) |
+| `structure.md` | ✔️ Présent | Référentiel de l'arborescence du projet |
+| `Sources/APP/` | ✔️ Présent | Cœur du framework (`AppleSWIFT.swift`, `ModelParser.swift`, `NumberValidator.swift`) |
+| `Tests/APPTests/` | ✔️ Présent | Suite de tests unitaires `XCTest` (`AppleSWIFTTests.swift`) |
+| `.github/` | ✔️ Présent | Gouvernance et modèle `PULL_REQUEST_TEMPLATE.md` |
 
 </details>
 
@@ -135,14 +131,11 @@ AppleSWIFT/
 
 ## 🔒 Sécurité et Bonnes Pratiques
 
-La version **1.1.0** met l'accent sur la fiabilité et la confidentialité dès la conception :
-
-- 🛡️ **Zero-Dependency Security** : aucune bibliothèque tierce n'est importée dans `Package.swift`, éliminant les risques liés à la chaîne d'approvisionnement (*Supply-Chain*).
-- 🔐 **Traitement 100 % local (Privacy-First)** : aucune donnée (numéro de téléphone ou identifiant d'appareil) ne transite sur le réseau ni n'est journalisée.
-- 🧼 **Parsing défensif** : privilégiez des entrées nettoyées (suppression d'espaces/caractères superflus) et évitez tout déballage forcé (`!`) lors de l'extension des parsers.
-
-> [!IMPORTANT]
-> **Couverture de tests** : conformément à `structure.md`, le dossier `Tests/` n'est pas encore présent dans le dépôt. Pour un usage critique sur la validation de numéros, il est recommandé d'ajouter des tests unitaires avant déploiement en production.
+- 🛡️ **Zero-Dependency Security** : aucune bibliothèque tierce dans `Package.swift` (surface d'attaque nulle côté dépendances).
+- 🕶️ **Masquage RGPD (`masked`)** : les numéros valides sont masqués automatiquement (`+336******78`) et les entrées invalides retournent `"***"` afin de ne jamais exposer de données sensibles dans les logs.
+- ⚡ **Garde‑fous O(1)** : vérification instantanée de la taille UTF‑8 (`utf8.count`) avant tout traitement de chaîne.
+- 🔐 **Traitement 100 % local** : aucun appel réseau, aucune télémétrie.
+- 🧵 **Swift Concurrency (`Sendable`)** : toutes les structures publiques sont immuables et sûres entre threads/acteurs.
 
 ---
 
@@ -150,7 +143,7 @@ La version **1.1.0** met l'accent sur la fiabilité et la confidentialité dès 
 
 ### Via Swift Package Manager (SwiftPM)
 
-Ajoutez le dépôt directement dans Xcode (`File > Add Package Dependencies...`) ou dans votre `Package.swift` :
+Ajoutez le dépôt dans Xcode (`File > Add Package Dependencies...`) ou dans votre `Package.swift` :
 
 ```swift
 dependencies: [
@@ -173,43 +166,45 @@ import AppleSWIFT
 
 let parser = AppleSWIFT()
 
-// 1. Validation d'un numéro de téléphone (NumberValidator)
-let number = parser.validateNumber("+33612345678")
-print("Numéro valide :", number.isValid)
+// 1. Validation & masquage sécurisé d'un numéro
+let number = parser.validateNumber("+33 6 12 34 56 78")
+print(number.isValid)    // true
+print(number.normalized) // Optional("+33612345678")
+print(number.masked)     // "+336******78" (sûr pour les logs)
 
-// 2. Extraction marque & modèle (ModelParser)
+// 2. Parsing & formatage de modèle
 let info = parser.parseModel("iPhone 14 Pro")
-print("Marque :", info.brand) // "iPhone"
-print("Modèle :", info.model) // "14 Pro"
+print(info.brand)        // "iPhone"
+print(info.model)        // "14 Pro"
+print(info.formatted)    // "iPhone 14 Pro"
 ```
 
 > [!TIP]
-> Pour étendre le comportement sans modifier la façade publique `AppleSWIFT.swift`, ajoutez vos nouvelles règles directement dans `ModelParser.swift` ou `NumberValidator.swift`.
+> Lancez `swift test` à la racine du dépôt pour vérifier l'ensemble des scénarios de validation, parsing et sécurité.
 
 ---
 
 ## 🧭 Feuille de route
 
 ### ✅ Accompli (v1.0.0 → v1.1.0)
-- [x] Squelette SwiftPM léger et sans dépendances (`Sources/APP/`)
-- [x] Façade unifiée `AppleSWIFT`, `ModelParser` et `NumberValidator`
-- [x] Documentation modernisée v1.1.0 avec sommaire opérationnel et schéma Mermaid
+- [x] Squelette SwiftPM sans dépendances (`Sources/APP/`)
+- [x] Masquage RGPD (`masked`), normalisation et garde‑fous O(1)
+- [x] Conformité `Sendable` pour Swift Concurrency
+- [x] Ajout de `Tests/APPTests/` et `.github/PULL_REQUEST_TEMPLATE.md`
 
-### 🔮 Propositions d'évolution (Prochaines versions)
-- [ ] 🧪 **Création de `Tests/`** : suite de tests unitaires SwiftPM pour `ModelParser` et `NumberValidator`
-- [ ] 🛡️ **Gouvernance `.github/`** : ajout de `PULL_REQUEST_TEMPLATE.md`, `SECURITY.md` et CI GitHub Actions (`swift build` / `swift test`)
-- [ ] 📱 **Base interne de modèles Apple** : correspondance enrichie des générations iPhone / iPad / Mac
-- [ ] ⚙️ **Modes `strict` / `permissif`** pour la validation et le formatage international des numéros
-- [ ] ⌚ **Support étendu** : compatibilité officielle `watchOS` et `visionOS`
-- [ ] 🎨 **Helpers SwiftUI** : composants d'affichage formaté prêts à l'emploi
-- [ ] 💻 **Mode CLI / Scripting** : utilitaire en ligne de commande pour inspection rapide
+### 🔮 Prochaines versions (v1.2.0+)
+- [ ] 📱 Base interne des identifiants matériels Apple (`iPhone15,2` → `iPhone 14 Pro`)
+- [ ] ⚙️ Modes `strict` / `permissif` configurables pour les formats internationaux
+- [ ] ⌚ Support officiel `watchOS` et `visionOS`
+- [ ] 🚀 Workflow CI GitHub Actions (`.github/workflows/swift.yml`)
+- [ ] 🎨 Extensions SwiftUI pour affichage formaté
 
 ---
 
 ## 📜 Gouvernance et Licence
 
-### 📁 Gouvernance du dépôt
-Les fichiers de gouvernance et modèles de contribution (comme `PULL_REQUEST_TEMPLATE.md`, `ISSUE_TEMPLATE` ou `SECURITY.md`) ont vocation à être centralisés dans un dossier `.github/` à la racine du dépôt.
+### 📁 Gouvernance
+Les contributions s'appuient sur le modèle `.github/PULL_REQUEST_TEMPLATE.md`.
 
 ### ⚖️ Licence
 Ce projet est distribué sous licence **APL‑FR v1.0** (*AppleSWIFT Personal License*) : libre, simple et utilisable dans tout contexte compatible.
@@ -225,10 +220,3 @@ Ultra‑light • Ultra‑clean • Ultra‑modular
 *Apple‑grade micro‑framework*
 
 </div>
-
----
-
-<!--
-### 💡 Conseil pour l'étape suivante
-Si tu souhaites automatiser ce workflow sur GitHub dès cette PR, tu peux également créer le fichier `.github/PULL_REQUEST_TEMPLATE.md` avec le squelette utilisé en partie 1 : cela cochera immédiatement la case `.github/` dans `structure.md` !
--->
