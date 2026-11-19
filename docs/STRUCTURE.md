@@ -1,5 +1,5 @@
 # 📁 AppleSWIFT
-- — *STRUCTURE*
+- — *STRUCTURE (v1.1.0)*
 
 Ce document *décrit la structure exacte du dépôt* **AppleSWIFT**.
 
@@ -8,71 +8,45 @@ Ce document *décrit la structure exacte du dépôt* **AppleSWIFT**.
 AppleSWIFT/
 ├── Package.swift
 ├── README.md
-└── Sources/
-    └── APP/
+├── structure.md
+├── .github/
+│   └── PULL_REQUEST_TEMPLATE.md
+├── Sources/
+│   └── APP/
+│       ├── AppleSWIFT.swift
+│       ├── ModelParser.swift
+│       └── NumberValidator.swift
+└── Tests/
+    └── APPTests/
+        └── AppleSWIFTTests.swift
 ```
 
 》》 📝 **Package.swift**
-```text
-Fichier de configuration Swift Package Manager.  
-Déclare le nom du package, les produits, les dépendances (aucune dans cette version), et les cibles.
-```
+- Configuration Swift Package Manager (Swift 5.9+, aucune dépendance externe).
+- Mappe le module public `AppleSWIFT` sur `Sources/APP` et les tests sur `Tests/APPTests`.
 
 》》 📘 **README.md**
-```text
-Documentation principale du projet.  
-Contient :
-- description du mini‑framework,
-- fonctionnalités,
-- installation via SwiftPM,
-- exemples d’utilisation,
-- objectif du projet.
-```
+- Documentation principale du projet (v1.1.0).
 
-》》 📂 **Sources**/
-- *Dossier standard SwiftPM contenant le code source du package*.
-```text
-Sources/
-└── APP/
-    ├── AppleSWIFT.swift
-    ├── ModelParser.swift
-    └── NumberValidator.swift
-```
+》》 📂 **Sources/APP/**
+- `AppleSWIFT.swift` : Façade publique `Sendable` du framework.
+- `ModelParser.swift` : Analyse et formatage de chaînes (`brand`, `model`, `formatted`).
+- `NumberValidator.swift` : Normalisation, validation E.164 basique et masquage RGPD (`masked`).
 
-》》 📁 **APP**/
-- Module principal du framework :
-```text
-🔹 AppleSWIFT.swift
-Point d’entrée du mini‑framework.  
-Expose les fonctions publiques : validation de numéro, parsing de modèle, formatage minimaliste.
+》》 🧪 **Tests/APPTests/**
+- `AppleSWIFTTests.swift` : Tests unitaires `XCTest` couvrant parsing, validation, masquage et garde‑fous.
 
-🔹 ModelParser.swift
-Analyse les chaînes de type “iPhone 14 Pro”, “Samsung Galaxy S21”, etc.  
-Retourne une structure contenant :
-- brand
-- model
-
-🔹 NumberValidator.swift
-Validation très simple de numéros de téléphone (format basique).
-```
-
----
-
-》》 🧪 **Tests**/
-- non présent dans la version actuelle
-   - Le dépôt ne contient pas encore de dossier *Tests/*.  
-   - SwiftPM le créera automatiquement si tu ajoutes des tests unitaires.
+》》 🛡️ **.github/**
+- `PULL_REQUEST_TEMPLATE.md` : Modèle standardisé pour les Pull Requests.
 
 ---
 
 ### 🎯 Résumé clair
 
 | Élément | Présent | Description |
-|--------|---------|-------------|
-| Package.swift | ✔️ | Configuration SwiftPM |
-| README.md | ✔️ | Documentation principale |
-| Sources/APP | ✔️ | Code source du framework |
-| Tests/ | ❌ | À ajouter si tu veux des tests |
-| .github/ | ❌ | Aucun fichier de gouvernance pour l’instant |
-
----
+| :--- | :---: | :--- |
+| `Package.swift` | ✔️ | Configuration SwiftPM |
+| `README.md` | ✔️ | Documentation principale (v1.1.0) |
+| `Sources/APP/` | ✔️ | Code source du framework |
+| `Tests/APPTests/` | ✔️ | Suite de tests unitaires `XCTest` |
+| `.github/` | ✔️ | Gouvernance (`PULL_REQUEST_TEMPLATE.md`) |
